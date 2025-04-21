@@ -1,0 +1,34 @@
+  
+every 3 minutes:
+	broadcast "&4&lClearLag &7(&c!&7) &8» &7Minden entitás törölve lesz &e&n30&r &cmp &7múlva."
+	wait 10 seconds
+	broadcast "&4&lClearLag &7(&c!&7) &8» &7Minden entitás törölve lesz &e&n20&r &cmp &7múlva."
+	wait 10 seconds
+	broadcast "&4&lClearLag &7(&c!&7) &8» &7Minden entitás törölve lesz &e10&r &cmp &7múlva."
+	wait 4 seconds
+	broadcast "&4&lClearLag &7(&c!&7) &8» &7Minden entitás törölve lesz &e5&r &cmp &7múlva."
+	wait 1 second
+	broadcast "&4&lClearLag &7(&c!&7) &8» &7Minden entitás törölve lesz &e4&r &cmp &7múlva."
+	wait 1 second
+	broadcast "&4&lClearLag &7(&c!&7) &8» &7Minden entitás törölve lesz &e3&r &cmp &7múlva."
+	wait 1 second
+	broadcast "&4&lClearLag &7(&c!&7) &8» &7Minden entitás törölve lesz &e2&r &cmp &7múlva."
+	wait 1 second
+	broadcast "&4&lClearLag &7(&c!&7) &8» &7Minden entitás törölve lesz &e1&r &cmp &7múlva."
+	wait 1 second
+	delete dropped items
+    
+command /clearlag:
+	permission: op
+	trigger:
+		broadcast "&4&lClearLag &7(&c!&7) &8» &7Minden entitás törölve lesz &e5&r &cmp &7múlva."
+		wait 1 second
+		broadcast "&4&lClearLag &7(&c!&7) &8» &7Minden entitás törölve lesz &e4&r &cmp &7múlva."
+		wait 1 second
+		broadcast "&4&lClearLag&7(&c!&7) &8» &7Minden entitás törölve lesz &e3&r &cmp &7múlva."
+		wait 1 second
+		broadcast "&4&lClearLag &7(&c!&7) &8» &7Minden entitás törölve lesz &e2&r &cmp &7múlva."
+		wait 1 second
+		broadcast "&4&lClearLag &7(&c!&7) &8» &7Minden entitás törölve lesz &e1&r &cmp &7múlva."
+		wait 1 second
+		delete dropped items
