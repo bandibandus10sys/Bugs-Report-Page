@@ -1,0 +1,84 @@
+# coded by bandibandus10 / base from spigotmc xddd
+
+# CREATED FOR HEALMC
+
+#---------[CORE]----------
+
+every 15 minutes:
+	loop all players:
+		add 1 to {coin::%loop-player%}
+		execute console command "eco give {coin::%loop-player%} 10000"
+        
+options:
+	command: playtime
+	permission: playtime.use
+	prefix: &8[&b&lPlaytime&8]
+
+variables:
+	{second::%player%} = 0
+	{minute::%player%} = 0
+	{hour::%player%} = 0
+	{coin::%player%} = 0
+
+every second:
+	loop all players: 
+		add 1 to {second::%loop-player%}
+		if {second::%loop-player%} is 60:
+			subtract 60 from {second::%loop-player%}
+			add 1 to {minute::%loop-player%}
+		if {minute::%loop-player%} is 60:
+			subtract 60 from {minute::%loop-player%}
+			add 1 to {hour::%loop-player%}
+			
+command /{@command} [<text>] [<text>] [<offlineplayer>] [<number>]:
+	trigger:
+		if arg-1 is not set:
+			if player has permission "playtime.admin":
+				send "{@prefix} &7Playtimeod: &e%{hour::%player%}% óra és %{minute::%player%}% perc"
+				wait 1 tick
+				send "{@prefix} &7Coinod: &e%{coin::%player%}%"
+				send ""
+				send "&7/playtime menu"
+				send ""
+				send "&4ADMIN MENU"
+				send "&7/playtime admin give <játékosnév> <mennyiség>"
+				send "&8 - Hozzáad egy X mennyiségű coint a játékos eggyenlegéhez."
+				send "&7/playtime admin set <játékosnév> <mennyiség>"
+				send "&8 - Beállit egy X mennyiségű coint a játékos eggyenlegéhez."
+			else:
+				send "{@prefix} &7Playtimeod: &e%{hour::%player%}% óra és %{minute::%player%}% perc"
+				send "{@prefix} &7Coinod: &e%{coin::%player%}%"
+				send ""
+				send "&7/playtime menu"
+#--------[MENUU]----------
+		if arg-1 is set:
+			if arg-1 is "menu":
+				set {_playtime} to a new chest inventory with 5 row named "&9&lPLAYTIME NYEREMÉNYEK"
+				set slot 0 and 1 and 2 and 3 and 4 and 5 and 6 and 7 and 8 and 9 and 17 and 18 and 26 and 27 and 35 and 36 and 37 and 38 and 39 and 40 and 41 and 42 and 43 and 44 of {_playtime} to black stained glass pane named "&c" 
+				set slot 20 of {_playtime} to tripwire hook named "&a3 db Szerencse Láda kulcs" with lore "" and "&7Ára:" and " &8» &e⛃4 COIN" and ""
+				open {_playtime} to player   
+			if arg-1 is "admin":
+				if player has permission "playtime.admin": 
+					if arg-2 is "give":
+						if arg-3 is a player:
+							if arg-4 is set:
+								add arg-4 to {coin::%arg-3%}
+								send "&aSikeresen hozzáadtál &e%arg-4% coint &c%arg-3%-nak/nek."   
+					if arg-2 is "ga":
+						if arg-3 is a player:
+							if arg-4 is set:
+								add arg-4 to {coin::%arg-3%}
+								send "&aSikeresen hozzáadtál &e%arg-4% coint &c%arg-3%-nak/nek."  
+                	                
+on inventory click:
+	if name of event-inventory is "&9&lPLAYTIME NYEREMÉNYEK":
+		if event-slot >= 0:
+			cancel event
+		if event-slot is 20:
+			if {coin::%player%} >= 4:
+				send "&eSikeresen vásároltál 3 darab &aSzerencse Láda kulcs&e-ot &e4 ⛃&e-ért." to player
+				execute console command "ac key give %player% Szerencse 3"
+				remove 4 from {coin::%player%}
+			else:
+				send "&cSikertelen vásárlás!" to player
+				close player's inventory
